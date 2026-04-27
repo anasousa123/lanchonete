@@ -1,53 +1,40 @@
 <!DOCTYPE html>
-
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>Cardápio</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>Cardápio</title>
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-  <header>
-    <h1>Cardápio</h1>
-  </header>
+<nav class="navbar">
+  <h1>🍔 FoodExpress</h1>
+  <div>
+    <a href="index.html">Início</a>
+    <a href="carrinho.html">Carrinho 🛒</a>
+  </div>
+</nav>
 
-  <main>
+<h2 class="titulo">Cardápio</h2>
 
-```
-<div class="produto">
-  <h3>Hot Dog</h3>
-  <p>R$ 10</p>
-  <button onclick="adicionar('Hot Dog', 10)">Adicionar</button>
+<div class="grid">
+
+  <div class="card">
+    <img src="img/burger.jpg">
+    <h3>Hambúrguer</h3>
+    <p>R$ 20,00</p>
+    <button onclick="addCarrinho('Hambúrguer',20)">Adicionar</button>
+  </div>
+
+  <div class="card">
+    <img src="img/pizza.jpg">
+    <h3>Pizza</h3>
+    <p>R$ 30,00</p>
+    <button onclick="addCarrinho('Pizza',30)">Adicionar</button>
+  </div>
+
 </div>
 
-<div class="produto">
-  <h3>Hambúrguer</h3>
-  <p>R$ 18</p>
-  <button onclick="adicionar('Hambúrguer', 18)">Adicionar</button>
-</div>
-
-<div class="produto">
-  <h3>Batata Frita</h3>
-  <p>R$ 12</p>
-  <button onclick="adicionar('Batata', 12)">Adicionar</button>
-</div>
-
-<div class="produto">
-  <h3>Refrigerante</h3>
-  <p>R$ 6</p>
-  <button onclick="adicionar('Refrigerante', 6)">Adicionar</button>
-</div>
-
-<br><br>
-<a href="carrinho.html">
-  <button>Ir para Carrinho</button>
-</a>
-```
-
-  </main>
-
-  <script src="script.js"></script>
-
+<script src="js/script.js"></script>
 </body>
 </html>
