@@ -1,21 +1,25 @@
-let carrinho = [];
-let total = 0;
-
 function adicionar(nome, preco) {
-carrinho.push({ nome, preco });
-total += preco;
+let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
 
-atualizarCarrinho();
+carrinho.push({ nome, preco });
+
+localStorage.setItem("carrinho", JSON.stringify(carrinho));
+
+alert("Adicionado ao carrinho!");
 }
 
-function atualizarCarrinho() {
-let lista = document.getElementById("carrinho");
+function carregarCarrinho() {
+let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+let lista = document.getElementById("lista");
+let total = 0;
+
 lista.innerHTML = "";
 
 carrinho.forEach(item => {
 let li = document.createElement("li");
 li.textContent = item.nome + " - R$ " + item.preco;
 lista.appendChild(li);
+total += item.preco;
 });
 
 document.getElementById("total").textContent = total;
@@ -23,19 +27,13 @@ document.getElementById("total").textContent = total;
 
 function finalizarPedido() {
 let nome = document.getElementById("nome").value;
-let tipo = document.getElementById("tipo").value;
-let endereco = document.getElementById("endereco").value;
-let pagamento = document.getElementById("pagamento").value;
 
-if (carrinho.length === 0) {
-alert("Carrinho vazio!");
+if (!nome) {
+alert("Digite seu nome!");
 return;
 }
 
-alert("Pedido enviado!\n\nNome: " + nome +
-"\nTipo: " + tipo +
-"\nPagamento: " + pagamento +
-"\nTotal: R$ " + total);
+localStorage.removeItem("carrinho");
 
-// depois vamos enviar pro Firebase
+window.location.href = "sucesso.html";
 }
