@@ -4,6 +4,50 @@
 <meta charset="UTF-8">
 <title>Carrinho</title>
 <link rel="stylesheet" href="css/style.css">
+
+<style>
+.carrinho {
+  max-width: 600px;
+  margin: 30px auto;
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+
+.item button {
+  background: red;
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.total {
+  font-size: 20px;
+  margin-top: 20px;
+}
+
+.finalizar {
+  width: 100%;
+  padding: 12px;
+  background: #25D366;
+  color: white;
+  border: none;
+  font-size: 16px;
+  margin-top: 15px;
+  cursor: pointer;
+  border-radius: 8px;
+}
+</style>
 </head>
 <body>
 
@@ -13,10 +57,66 @@
 </nav>
 
 <div class="carrinho">
-  <ul id="lista"></ul>
-  <h3 id="total"></h3>
+  <div id="lista"></div>
+  <h3 id="total" class="total"></h3>
+
+  <button class="finalizar" onclick="finalizarPedido()">
+    Finalizar no WhatsApp
+  </button>
 </div>
 
 <script src="js/script.js"></script>
+
+<script>
+let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+
+function renderCarrinho() {
+  const lista = document.getElementById("lista");
+  lista.innerHTML = "";
+
+  let total = 0;
+
+  carrinho.forEach((item, index) => {
+    total += item.preco;
+
+    lista.innerHTML += `
+      <div class="item">
+        <span>${item.nome} - R$ ${item.preco.toFixed(2)}</span>
+        <button onclick="removerItem(${index})">X</button>
+      </div>
+    `;
+  });
+
+  document.getElementById("total").innerText = "Total: R$ " + total.toFixed(2);
+}
+
+function removerItem(index) {
+  carrinho.splice(index, 1);
+  localStorage.setItem("carrinho", JSON.stringify(carrinho));
+  renderCarrinho();
+}
+
+function finalizarPedido() {
+  if (carrinho.length === 0) {
+    alert("Carrinho vazio!");
+    return;
+  }
+
+  let msg = "🛒 *Novo Pedido*%0A%0A";
+
+  carrinho.forEach(item => {
+    msg += `• ${item.nome} - R$ ${item.preco.toFixed(2)}%0A`;
+  });
+
+  let total = carrinho.reduce((s, i) => s + i.preco, 0);
+  msg += `%0ATotal: R$ ${total.toFixed(2)}`;
+
+  let numero = "5599999999999"; // SEU NÚMERO
+  window.open(`https://wa.me/${numero}?text=${msg}`, "_blank");
+}
+
+renderCarrinho();
+</script>
+
 </body>
 </html>

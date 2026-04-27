@@ -3,7 +3,61 @@
 <head>
 <meta charset="UTF-8">
 <title>Cardápio</title>
+
 <link rel="stylesheet" href="css/style.css">
+
+<style>
+.titulo {
+  text-align: center;
+  margin: 20px;
+  font-size: 28px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+
+.card h3 {
+  margin: 10px;
+}
+
+.card p {
+  margin: 10px;
+  font-weight: bold;
+}
+
+.card button {
+  width: 100%;
+  padding: 12px;
+  background: #ff3c3c;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+</style>
+
 </head>
 <body>
 
@@ -17,24 +71,37 @@
 
 <h2 class="titulo">Cardápio</h2>
 
-<div class="grid">
+<div id="produtos" class="grid"></div>
 
-  <div class="card">
-    <img src="img/burger.jpg">
-    <h3>Hambúrguer</h3>
-    <p>R$ 20,00</p>
-    <button onclick="addCarrinho('Hambúrguer',20)">Adicionar</button>
-  </div>
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"></script>
 
-  <div class="card">
-    <img src="img/pizza.jpg">
-    <h3>Pizza</h3>
-    <p>R$ 30,00</p>
-    <button onclick="addCarrinho('Pizza',30)">Adicionar</button>
-  </div>
-
-</div>
-
+<script src="js/firebase.js"></script>
 <script src="js/script.js"></script>
+
+<script>
+// carregar produtos do banco
+db.collection("produtos").onSnapshot(snapshot => {
+  const div = document.getElementById("produtos");
+  div.innerHTML = "";
+
+  snapshot.forEach(doc => {
+    const p = doc.data();
+
+    div.innerHTML += `
+      <div class="card">
+        <img src="${p.imagem}">
+        <h3>${p.nome}</h3>
+        <p>R$ ${parseFloat(p.preco).toFixed(2)}</p>
+        <button onclick="addCarrinho('${p.nome}', ${p.preco})">
+          Adicionar
+        </button>
+      </div>
+    `;
+  });
+});
+</script>
+
 </body>
 </html>

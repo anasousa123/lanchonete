@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Painel Admin</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+<style>
+body {
+  font-family: 'Segoe UI';
+  background: #f5f5f5;
+  margin: 0;
+}
+
+.container {
+  max-width: 900px;
+  margin: 30px auto;
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+h2 {
+  text-align: center;
+}
+
+.form {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+input {
+  padding: 10px;
+}
+
+button {
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.salvar {
+  background: #28a745;
+  color: white;
+}
+
+.lista {
+  margin-top: 20px;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  background: #fafafa;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+}
+
+.acoes button {
+  margin-left: 5px;
+}
+
+.editar {
+  background: orange;
+}
+
+.excluir {
+  background: red;
+  color: white;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Painel Admin</h2>
+
+  <div class="form">
+    <input id="nome" placeholder="Nome do produto">
+    <input id="preco" type="number" placeholder="Preço">
+    <input id="imagem" placeholder="URL da imagem">
+
+    <button class="salvar" onclick="salvar()">Cadastrar</button>
+  </div>
+
+  <div id="lista" class="lista"></div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"></script>
+
+<script src="js/firebase.js"></script>
+
+<script>
+let editandoId = null;
+
+// SALVAR OU EDITAR
+function salvar() {
+  const nome = document.getElementById("nome").value.trim();
+  const preco = parseFloat(document.getElementById("preco").value);
+  const imagem = document.getElementById("imagem").value.trim();
+
+  if (!nome || !preco) {
+    alert("Preencha nome e preço");
+    return;
+  }
+
+  if (editandoId) {
+    db.collection("produtos").doc(editandoId).update({
+      nome, preco, imagem
+    });
+    editandoId = null;
+  } else {
+    db.collection("produtos").add({
+      nome, preco, imagem
+    });
+  }
+
+  limparCampos();
+}
+
+// LISTAR EM TEMPO REAL
+db.collection("produtos").onSnapshot(snapshot => {
+  const div = document.getElementById("lista");
+  div.innerHTML = "";
+
+  snapshot.forEach(doc => {
+    const p = doc.data();
+
+    div.innerHTML += `
+      <div class="item">
+        <span>${p.nome} - R$ ${p.preco.toFixed(2)}</span>
+
+        <div class="acoes">
+          <button class="editar" onclick="editar('${doc.id}', '${p.nome}', ${p.preco}, '${p.imagem}')">Editar</button>
+          <button class="excluir" onclick="excluir('${doc.id}')">Excluir</button>
+        </div>
+      </div>
+    `;
+  });
+});
+
+// EDITAR
+function editar(id, nome, preco, imagem) {
+  document.getElementById("nome").value = nome;
+  document.getElementById("preco").value = preco;
+  document.getElementById("imagem").value = imagem;
+
+  editandoId = id;
+}
+
+// EXCLUIR
+function excluir(id) {
+  if (confirm("Deseja excluir?")) {
+    db.collection("produtos").doc(id).delete();
+  }
+}
+
+// LIMPAR CAMPOS
+function limparCampos() {
+  document.getElementById("nome").value = "";
+  document.getElementById("preco").value = "";
+  document.getElementById("imagem").value = "";
+}
+</script>
+
+</body>
+</html>

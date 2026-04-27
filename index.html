@@ -3,7 +3,59 @@
 <head>
 <meta charset="UTF-8">
 <title>FoodExpress</title>
+
 <link rel="stylesheet" href="css/style.css">
+
+<style>
+.hero {
+  background: linear-gradient(135deg, #ff3c3c, #ff9900);
+  color: white;
+  text-align: center;
+  padding: 100px 20px;
+}
+
+.hero h2 {
+  font-size: 40px;
+}
+
+.btn {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 25px;
+  background: black;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+}
+
+.section {
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.cards {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.card-home {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  width: 250px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+footer {
+  background: #111;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+</style>
+
 </head>
 <body>
 
@@ -18,11 +70,45 @@
   </nav>
 </header>
 
+<!-- HERO -->
 <section class="hero">
   <h2>Peça sua comida favorita</h2>
-  <p>Rápido, fácil e delicioso</p>
+  <p>Entrega rápida direto na sua casa</p>
   <a href="cardapio.html" class="btn">Ver Cardápio</a>
 </section>
+
+<!-- DIFERENCIAIS -->
+<section class="section">
+  <h2>Por que escolher a gente?</h2>
+
+  <div class="cards">
+    <div class="card-home">
+      <h3>🚀 Entrega rápida</h3>
+      <p>Seu pedido chega em minutos</p>
+    </div>
+
+    <div class="card-home">
+      <h3>🍔 Qualidade</h3>
+      <p>Ingredientes frescos e sabor incrível</p>
+    </div>
+
+    <div class="card-home">
+      <h3>💳 Pagamento fácil</h3>
+      <p>Pague no PIX ou na entrega</p>
+    </div>
+  </div>
+</section>
+
+<!-- CHAMADA FINAL -->
+<section class="section">
+  <h2>Pronto para pedir?</h2>
+  <a href="cardapio.html" class="btn">Fazer Pedido</a>
+</section>
+
+<!-- RODAPÉ -->
+<footer>
+  <p>© 2026 FoodExpress - Todos os direitos reservados</p>
+</footer>
 
 </body>
 </html>
