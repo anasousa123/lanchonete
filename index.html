@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Lanchone</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <h1>🍔 Lanchone</h1>
+    <p>Os melhores lanches da cidade!</p>
+  </header>
+
+  <main>
+    <h2>Cardápio</h2>
+
+```
+<div class="produto">
+  <h3>Hot Dog</h3>
+  <p>R$ 10,00</p>
+  <button onclick="adicionar('Hot Dog', 10)">Adicionar</button>
+</div>
+
+<div class="produto">
+  <h3>Hambúrguer</h3>
+  <p>R$ 18,00</p>
+  <button onclick="adicionar('Hambúrguer', 18)">Adicionar</button>
+</div>
+
+<div class="produto">
+  <h3>Batata Frita</h3>
+  <p>R$ 12,00</p>
+  <button onclick="adicionar('Batata', 12)">Adicionar</button>
+</div>
+
+<div class="produto">
+  <h3>Refrigerante</h3>
+  <p>R$ 6,00</p>
+  <button onclick="adicionar('Refrigerante', 6)">Adicionar</button>
+</div>
+
+<h2>Carrinho</h2>
+<ul id="carrinho"></ul>
+<p>Total: R$ <span id="total">0</span></p>
+
+<h2>Finalizar Pedido</h2>
+
+<input type="text" id="nome" placeholder="Seu nome"><br><br>
+
+<select id="tipo">
+  <option>Entrega</option>
+  <option>Retirada</option>
+  <option>Consumo no local</option>
+</select><br><br>
+
+<input type="text" id="endereco" placeholder="Endereço (se entrega)"><br><br>
+
+<select id="pagamento">
+  <option>Dinheiro</option>
+  <option>Cartão</option>
+  <option>Pix</option>
+</select><br><br>
+
+<button onclick="finalizarPedido()">Enviar Pedido</button>
+```
+
+  </main>
+
+  <script src="script.js"></script>
+
+</body>
+</html>

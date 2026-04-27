@@ -1,0 +1,26 @@
+body {
+font-family: Arial;
+text-align: center;
+background: #f5f5f5;
+}
+
+header {
+background: #ff4d4d;
+color: white;
+padding: 20px;
+}
+
+.produto {
+background: white;
+margin: 10px;
+padding: 10px;
+border-radius: 10px;
+}
+
+button {
+background: #ff4d4d;
+color: white;
+border: none;
+padding: 10px;
+cursor: pointer;
+}
