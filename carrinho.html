@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Carrinho</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body onload="carregarCarrinho()">
+
+  <header>
+    <h1>Seu Carrinho</h1>
+  </header>
+
+  <main>
+
+```
+<ul id="lista"></ul>
+<p>Total: R$ <span id="total">0</span></p>
+
+<h2>Finalizar Pedido</h2>
+
+<input type="text" id="nome" placeholder="Seu nome"><br><br>
+
+<select id="tipo">
+  <option>Entrega</option>
+  <option>Retirada</option>
+  <option>Consumo no local</option>
+</select><br><br>
+
+<input type="text" id="endereco" placeholder="Endereço"><br><br>
+
+<select id="pagamento">
+  <option>Dinheiro</option>
+  <option>Cartão</option>
+  <option>Pix</option>
+</select><br><br>
+
+<button onclick="finalizarPedido()">Finalizar Pedido</button>
+```
+
+  </main>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
