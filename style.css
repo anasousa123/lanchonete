@@ -103,3 +103,37 @@ body{
   margin-top:5px;
   color:#aaa;
 }
+/* BOTÃO MENU */
+.menu-btn{
+  position:fixed;
+  top:15px;
+  left:15px;
+  font-size:25px;
+  color:white;
+  z-index:1000;
+}
+
+/* MENU LATERAL */
+.menu{
+  position:fixed;
+  top:0;
+  left:-250px;
+  width:250px;
+  height:100%;
+  background:#111;
+  padding:20px;
+  transition:0.3s;
+  z-index:999;
+}
+
+.menu h2{
+  margin-bottom:20px;
+}
+
+.menu a{
+  display:block;
+  color:white;
+  text-decoration:none;
+  margin:15px 0;
+  font-size:16px;
+}

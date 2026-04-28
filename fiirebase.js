@@ -15,4 +15,13 @@ function copiarPix(){
   let chave = document.getElementById("pix").value;
   navigator.clipboard.writeText(chave);
   alert("PIX copiado!");
+  function abrirMenu(){
+  let menu = document.getElementById("menu");
+
+  if(menu.style.left === "0px"){
+    menu.style.left = "-250px";
+  } else {
+    menu.style.left = "0px";
+  }
+}
 }
