@@ -1,129 +1,28 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<title>Painel Admin</tit
-
-button {
-  padding: 10px
-.lista {
-  margin-top: 20px;
-}
-
-.item {
-  display: flex;
-  justify-c: #fafafa;
-  padding: 10px;
-  margin-bottom: 10px;
-  border-radius: 8px;
-}
-
-.acoes button {
-  margin-left: 5px;
-}
-
-.editar {
-  background: orange;
-}
-
-.excluir {
-  background: red;
-  color: white;
-}
-</style>
-</head>
+<html>
 <body>
 
-<div class="container">
-  <h2>Painel Admin</h2>
+<h2>Resumo</h2>
+<div id="dados"></div>
 
-  <div class="form">
-    <input id="nome" placeholder="Nome do produto">
-    <input id="preco" type="number" placeholder="Preço">
-    <input id="imagem" placeholder="URL da imagem">
+<script type="module">
+import { db, collection, getDocs } from "./firebase.js";
 
-    <button class="salvar" onclick="salvar()">Cadastrar</button>
-  </div>
+async function carregar(){
+  const snap = await getDocs(collection(db,"pedidos"));
 
-  <div id="lista" class="lista"></div>
-</div>
+  let total=0;
 
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"></script>
-
-<script src="js/firebase.js"></script>
-
-<script>
-let editandoId = null;
-
-// SALVAR OU EDITAR
-function salvar() {
-  const nome = document.getElementById("nome").value.trim();
-  const preco = parseFloat(document.getElementById("preco").value);
-  const imagem = document.getElementById("imagem").value.trim();
-
-  if (!nome || !preco) {
-    alert("Preencha nome e preço");
-    return;
-  }
-
-  if (editandoId) {
-    db.collection("produtos").doc(editandoId).update({
-      nome, preco, imagem
-    });
-    editandoId = null;
-  } else {
-    db.collection("produtos").add({
-      nome, preco, imagem
-    });
-  }
-
-  limparCampos();
-}
-
-// LISTAR EM TEMPO REAL
-db.collection("produtos").onSnapshot(snapshot => {
-  const div = document.getElementById("lista");
-  div.innerHTML = "";
-
-  snapshot.forEach(doc => {
-    const p = doc.data();
-
-    div.innerHTML += `
-      <div class="item">
-        <span>${p.nome} - R$ ${p.preco.toFixed(2)}</span>
-
-        <div class="acoes">
-          <button class="editar" onclick="editar('${doc.id}', '${p.nome}', ${p.preco}, '${p.imagem}')">Editar</button>
-          <button class="excluir" onclick="excluir('${doc.id}')">Excluir</button>
-        </div>
-      </div>
-    `;
+  snap.forEach(d=>{
+    let p=d.data();
+    p.itens.forEach(i=> total+=i.preco);
   });
-});
 
-// EDITAR
-function editar(id, nome, preco, imagem) {
-  document.getElementById("nome").value = nome;
-  document.getElementById("preco").value = preco;
-  document.getElementById("imagem").value = imagem;
-
-  editandoId = id;
+  document.getElementById("dados").innerText =
+    "Total vendido: R$ "+total;
 }
 
-// EXCLUIR
-function excluir(id) {
-  if (confirm("Deseja excluir?")) {
-    db.collection("produtos").doc(id).delete();
-  }
-}
-
-// LIMPAR CAMPOS
-function limparCampos() {
-  document.getElementById("nome").value = "";
-  document.getElementById("preco").value = "";
-  document.getElementById("imagem").value = "";
-}
+carregar();
 </script>
 
 </body>

@@ -1,110 +1,28 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<title>Admin - Login</title>
-
-<link rel="stylesheet" href="style.css">
-
-<style>
-body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(135deg, #1a1a1a, #333);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-.login-box {
-  background: #fff;
-  padding: 30px;
-  border-radius: 12px;
-  width: 300px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-  text-align: center;
-}
-
-.login-box h2 {
-  margin-bottom: 20px;
-}
-
-input {
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-}
-
-button {
-  width: 100%;
-  padding: 12px;
-  background: #ff3c3c;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-button:hover {
-  background: #e63232;
-}
-
-#erro {
-  color: red;
-  margin-top: 10px;
-  font-size: 14px;
-}
-
-#loading {
-  display: none;
-  font-size: 14px;
-  margin-top: 10px;
-}
-</style>
-
-</head>
+<html>
 <body>
 
-<div class="login-box">
-  <h2>Painel Admin</h2>
+<h2>Cadastrar Produto</h2>
 
-  <input type="email" id="email" placeholder="Email">
-  <input type="password" id="senha" placeholder="Senha">
+<input id="nome" placeholder="Nome">
+<input id="preco" placeholder="Preço">
+<input id="img" placeholder="URL da imagem">
 
-  <button onclick="login()">Entrar</button>
+<button onclick="salvar()">Salvar</button>
 
-  <div id="loading">Entrando...</div>
-  <div id="erro"></div>
-</div>
+<script type="module">
+import { db, collection, addDoc } from "./firebase.js";
 
-<!-- Firebase -->
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"></script>
+window.salvar = async function(){
+  await addDoc(collection(db,"produtos"),{
+    nome:document.getElementById("nome").value,
+    preco:Number(document.getElementById("preco").value),
+    imagem:document.getElementById("img").value
+  });
 
-<script src="firebase.js"></script>
+  alert("Produto salvo!");
+}
+</script>
 
-<script>
-function login() {
-  let email = document.getElementById("email").value;
-  let senha = document.getElementById("senha").value;
-
-  let erro = document.getElementById("erro");
-  let loading = document.getElementById("loading");
-
-  erro.innerText = "";
-  loading.style.display = "block";
-
-  firebase.auth().signInWithEmailAndPassword(email, senha)
-    .then(() => {
-      window.location.href = "dashboard.html";
-    })
-    .catch((e) => {
-      loading.style.display = "none";
-
-      if (e.code === "auth/user-not-found") {
-        erro.innerText = "Usuário não encontrado";
-      } else i
+</body>
+</html>
