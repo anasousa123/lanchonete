@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Categorias</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<h2>Categorias</h2>
+
+<div class="grid">
+
+  <button onclick="abrir('lanches')" class="cat-btn">🍔 Lanches</button>
+  <button onclick="abrir('bebidas')" class="cat-btn">🥤 Bebidas</button>
+  <button onclick="abrir('porcoes')" class="cat-btn">🍟 Porções</button>
+
+</div>
+
+<script>
+function abrir(categoria){
+  localStorage.setItem("categoria", categoria);
+  location.href = "produtos.html";
+}
+</script>
+
+</body>
+</html>
