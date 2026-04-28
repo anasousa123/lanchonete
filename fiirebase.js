@@ -11,3 +11,8 @@ const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 
 export { collection, addDoc, getDocs };
+function copiarPix(){
+  let chave = document.getElementById("pix").value;
+  navigator.clipboard.writeText(chave);
+  alert("PIX copiado!");
+}

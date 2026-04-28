@@ -22,6 +22,11 @@ window.salvar = async function(){
 
   alert("Produto salvo!");
 }
+let audio = new Audio("https://www.soundjay.com/buttons/sounds/button-3.mp3");
+
+onSnapshot(collection(db,"pedidos"), snap=>{
+  audio.play(); // toca som quando chega pedido
+});
 </script>
 
 </body>
