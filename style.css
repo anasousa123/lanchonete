@@ -61,3 +61,45 @@ body{
   font-size:14px;
   opacity:0.9;
 }
+
+body{
+  margin:0;
+  background:black;
+  color:white;
+  font-family:Arial;
+}
+
+/* TOPO */
+.topo{
+  background:#1a1a1a;
+  padding:15px;
+  font-size:18px;
+}
+
+/* LISTA */
+.lista{
+  padding:20px;
+}
+
+/* ITEM */
+.item{
+  margin-bottom:30px;
+  border-bottom:1px solid #333;
+  padding-bottom:15px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.item:hover{
+  transform:scale(1.02);
+}
+
+.item h2{
+  font-size:26px;
+  margin:0;
+}
+
+.item p{
+  margin-top:5px;
+  color:#aaa;
+}

@@ -2,19 +2,42 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Categorias</title>
-<link rel="stylesheet" href="style.css">
+<title>Cardápio</title>
+<link rel="stylesheet" href="style.css?v=4">
 </head>
 
 <body>
 
-<h2>Categorias</h2>
+<div class="topo">
+  <h1>🍔 CARDÁPIO</h1>
+</div>
 
-<div class="grid">
+<div class="lista">
 
-  <button onclick="abrir('lanches')" class="cat-btn">🍔 Lanches</button>
-  <button onclick="abrir('bebidas')" class="cat-btn">🥤 Bebidas</button>
-  <button onclick="abrir('porcoes')" class="cat-btn">🍟 Porções</button>
+  <div class="item" onclick="abrir('sanduiches')">
+    <h2>Sanduíches</h2>
+    <p>X-Burger, X-Salada, X-Tudo...</p>
+  </div>
+
+  <div class="item" onclick="abrir('hotdog')">
+    <h2>Cachorro-quente</h2>
+    <p>Tradicional, completo, especial...</p>
+  </div>
+
+  <div class="item" onclick="abrir('porcoes')">
+    <h2>Porções</h2>
+    <p>Batata frita, nuggets, anéis de cebola...</p>
+  </div>
+
+  <div class="item" onclick="abrir('bebidas')">
+    <h2>Bebidas</h2>
+    <p>Refrigerantes, sucos, água...</p>
+  </div>
+
+  <div class="item" onclick="abrir('sobremesas')">
+    <h2>Sobremesas</h2>
+    <p>Açaí, milkshake, doces...</p>
+  </div>
 
 </div>
 
