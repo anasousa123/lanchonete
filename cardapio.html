@@ -10,36 +10,26 @@
 
 <h2>Cardápio</h2>
 
-<div id="lista-produtos" class="cardapio"></div>
+<div class="grid">
 
-<script type="module">
-import { db } from "./firebase.js";
-import { collection, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+  <div class="card">
+    <img src="https://images.unsplash.com/photo-1550547660-d9450f859349">
+    <h3>X-Burger</h3>
+    <p>R$ 20</p>
+    <button onclick="add('X-Burger',20)">Adicionar</button>
+  </div>
 
-async function carregarProdutos(){
-  const querySnapshot = await getDocs(collection(db, "produtos"));
-  let html = "";
+  <div class="card">
+    <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd">
+    <h3>X-Salada</h3>
+    <p>R$ 22</p>
+    <button onclick="add('X-Salada',22)">Adicionar</button>
+  </div>
 
-  querySnapshot.forEach(doc => {
-    const p = doc.data();
+</div>
 
-    html += `
-      <div class="item">
-        <img src="${p.imagem}">
-        <h3>${p.nome}</h3>
-        <p>R$ ${p.preco}</p>
-        <button onclick="addCarrinho('${p.nome}', ${p.preco})">Adicionar</button>
-      </div>
-    `;
-  });
-
-  document.getElementById("lista-produtos").innerHTML = html;
-}
-
-carregarProdutos();
-</script>
+<button onclick="location.href='carrinho.html'">🛒 Carrinho</button>
 
 <script src="app.js"></script>
-
 </body>
 </html>
