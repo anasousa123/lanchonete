@@ -1,9 +1,6 @@
 body{
   margin:0;
   font-family:Arial;
-  background:#0d0d0d;
-  color:white;
-  text-align:center;
 }
 
 .hero{
@@ -21,66 +18,46 @@ body{
   position:absolute;
   width:100%;
   height:100%;
-  background:rgba(0,0,0,0.6);
+  background:rgba(0,0,0,0.5);
 }
 
-.conteudo{
+/* CAIXA PROFISSIONAL */
+.box{
   position:absolute;
   top:50%;
   left:50%;
   transform:translate(-50%,-50%);
-}
-
-.logo{
-  width:120px;
-  margin-bottom:20px;
-}
-
-.btn{
-  background:red;
-  padding:15px;
-  border:none;
+  background:rgba(0,0,0,0.6);
+  backdrop-filter: blur(10px);
+  padding:30px;
+  border-radius:20px;
+  text-align:center;
   color:white;
-  border-radius:50px;
-  width:220px;
+  width:80%;
+  max-width:350px;
 }
 
+/* BOTÃO NÍVEL APP */
+.btn-main{
+  background:#ff1a1a;
+  color:white;
+  border:none;
+  padding:18px;
+  width:100%;
+  border-radius:50px;
+  font-size:18px;
+  margin-top:15px;
+  box-shadow:0 5px 15px rgba(255,0,0,0.5);
+  transition:0.3s;
+}
+
+.btn-main:hover{
+  transform:scale(1.05);
+}
+
+/* INFO */
 .info{
   margin-top:20px;
-}
-
-.grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-  padding:10px;
-}
-
-.cat-btn{
-  background:#1a1a1a;
-  padding:20px;
-  border:none;
-  color:white;
-  border-radius:10px;
-}
-
-.card{
-  background:#1a1a1a;
-  padding:10px;
-  border-radius:10px;
-}
-
-.card img{
-  width:100%;
-  border-radius:10px;
-}
-
-.btn-add{
-  background:red;
-  color:white;
-  border:none;
-  padding:15px;
-  width:100%;
-  border-radius:10px;
-  font-size:16px;
+  font-size:14px;
+  opacity:0.9;
 }
