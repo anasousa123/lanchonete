@@ -3,11 +3,16 @@ let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
 function add(nome, preco){
   carrinho.push({nome, preco});
   localStorage.setItem("carrinho", JSON.stringify(carrinho));
-  alert("Adicionado!");
+  alert("Adicionado ao carrinho!");
 }
 
-if(document.getElementById("lista")){
+function carregarCarrinho(){
   let lista = document.getElementById("lista");
+  let totalEl = document.getElementById("total");
+
+  if(!lista) return;
+
+  lista.innerHTML = "";
   let total = 0;
 
   carrinho.forEach(i=>{
@@ -15,11 +20,7 @@ if(document.getElementById("lista")){
     total += i.preco;
   });
 
-  document.getElementById("total").innerText = "Total: R$ " + total;
+  totalEl.innerText = "Total: R$ " + total;
 }
 
-function finalizar(){
-  localStorage.removeItem("carrinho");
-  alert("Pedido enviado!");
-  location.href="status.html";
-}
+carregarCarrinho();

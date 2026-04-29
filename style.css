@@ -68,8 +68,9 @@ body{
 
 .card img{
   width:100%;
-  height:120px;
+  height:100px;
   object-fit:cover;
+    border-radius:10px;
 }
 
 /* BOTÃO CARRINHO */
@@ -95,4 +96,22 @@ body{
 .step{
   border-bottom:3px solid gray;
   padding:10px;
+}
+.menu{
+  position:fixed;
+  top:0;
+  left:-250px;
+  width:250px;
+  height:100%;
+  background:#111;
+  transition:0.3s;
+  padding:20px;
+}
+
+.menu-btn{
+  position:fixed;
+  top:15px;
+  left:15px;
+  font-size:25px;
+  color:white;
 }
