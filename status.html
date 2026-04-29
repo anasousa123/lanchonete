@@ -1,22 +1,21 @@
 <!DOCTYPE html>
 <html>
+<head>
+<meta charset="UTF-8">
+<title>Status</title>
+<link rel="stylesheet" href="style.css?v=5">
+</head>
+
 <body>
 
-<h2>Status do Pedido</h2>
+<h1 class="titulo">📦 Pedido</h1>
 
-<p id="status">Aguardando...</p>
-
-<script type="module">
-import { db, doc, onSnapshot } from "./firebase.js";
-
-let id = localStorage.getItem("pedidoId");
-
-onSnapshot(doc(db,"pedidos",id), (docSnap)=>{
-  let p = docSnap.data();
-  document.getElementById("status").innerText =
-    "Status: " + p.status;
-});
-</script>
+<div class="tracker">
+  <div id="s1" class="step">Pedido</div>
+  <div id="s2" class="step">Preparo</div>
+  <div id="s3" class="step">Entrega</div>
+  <div id="s4" class="step">Finalizado</div>
+</div>
 
 </body>
 </html>

@@ -3,63 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <title>Carrinho</title>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=4">
 </head>
 
 <body>
 
-<h2>Carrinho</h2>
+<h1 class="titulo">🛒 Carrinho</h1>
 
 <div id="lista"></div>
-<h3 id="total"></h3>
 
-<input id="nome" placeholder="Seu nome">
+<h2 id="total"></h2>
 
-<select id="tipo">
-  <option>delivery</option>
-  <option>retirada</option>
-  <option>local</option>
-</select>
+<button onclick="finalizar()" class="btn-main">Finalizar Pedido</button>
 
-<input id="endereco" placeholder="Endereço">
-
-<button onclick="finalizar()">Finalizar</button>
-
-<script type="module">
-import { db, collection, addDoc } from "./firebase.js";
-
-let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
-
-function mostrar(){
-  let html="", total=0;
-
-  carrinho.forEach(i=>{
-    html+=`<p>${i.nome} - R$ ${i.preco}</p>`;
-    total+=i.preco;
-  });
-
-  document.getElementById("lista").innerHTML=html;
-  document.getElementById("total").innerText="Total: "+total;
-}
-
-window.finalizar = async function(){
-  let pedido={
-    nome:document.getElementById("nome").value,
-    tipo:document.getElementById("tipo").value,
-    endereco:document.getElementById("endereco").value,
-    itens:carrinho
-  };
-
-  await addDoc(collection(db,"pedidos"),pedido);
-
-  alert("Pedido enviado!");
-  localStorage.removeItem("carrinho");
-}
-<input id="pix" value="seuemail@email.com" readonly>
-
-<button onclick="copiarPix()">Copiar PIX</button>
-mostrar();
-</script>
-
+<script src="app.js"></script>
 </body>
 </html>
